@@ -29,7 +29,9 @@ namespace CsharpLearn
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.cube = new System.Windows.Forms.PictureBox();
+			this.timer = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.cube)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -58,6 +60,7 @@ namespace CsharpLearn
 		#endregion
 
 		private System.Windows.Forms.PictureBox cube;
+		private System.Windows.Forms.Timer timer;
 	}
 }
 

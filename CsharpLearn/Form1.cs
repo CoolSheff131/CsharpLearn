@@ -13,6 +13,7 @@ namespace CsharpLearn
 	
 	public partial class Form1 : Form
 	{
+		private int dirX, dirY;
 		private int _width = 900;
 		private int _height = 800;
 		private int _sizeOfSides = 40;
@@ -21,9 +22,16 @@ namespace CsharpLearn
 			InitializeComponent();
 			this.Width = _width;
 			this.Height = _height;
+			dirX = 1;
+			dirY = 0;
 			_generatorMap();
+			timer.Tick += new EventHandler(_update);
+			timer.Interval = 500;
+			timer.Start();
+
 			this.KeyDown += new KeyEventHandler(OKP);
 		}
+		
 		private void _generatorMap()
 		{
 			for(int i = 0; i<_width / _sizeOfSides; i++)
@@ -44,21 +52,29 @@ namespace CsharpLearn
 
 			}
 		}
+		private void _update(object myObject, EventArgs eventArgs)
+		{
+			cube.Location = new Point(cube.Location.X + dirX * _sizeOfSides, cube.Location.Y + dirY * _sizeOfSides);
+		}
 		private void OKP(object sender, KeyEventArgs e)
 		{
 			switch (e.KeyCode.ToString())
 			{
 				case "Right":
-					cube.Location = new Point(cube.Location.X + _sizeOfSides, cube.Location.Y);
+					dirX = 1;
+					dirY = 0;
 					break;
 				case "Left":
-					cube.Location = new Point(cube.Location.X - _sizeOfSides, cube.Location.Y);
+					dirX = -1;
+					dirY = 0;
 					break;
 				case "Up":
-					cube.Location = new Point(cube.Location.X, cube.Location.Y - _sizeOfSides);
+					dirY = -1;
+					dirX = 0;
 					break;
 				case "Down":
-					cube.Location = new Point(cube.Location.X, cube.Location.Y + _sizeOfSides);
+					dirY = 1;
+					dirX = 0;
 					break;
 			}
 		}
