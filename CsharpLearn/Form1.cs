@@ -15,7 +15,11 @@ namespace CsharpLearn
 		public Form1()
 		{
 			InitializeComponent();
+			this.KeyDown += new KeyEventHandler(OKP);
 		}
-
+		private void OKP(object sender, KeyEventArgs e)
+		{
+			MessageBox.Show(e.KeyCode.ToString());
+		}
 	}
 }
