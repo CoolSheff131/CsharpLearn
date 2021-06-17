@@ -178,20 +178,32 @@ namespace CsharpLearn
 			switch (e.KeyCode.ToString())
 			{
 				case "Right":
-					dirX = 1;
-					dirY = 0;
+					if(dirX != 1 && dirY != 0)
+					{
+						dirX = 1;
+						dirY = 0;
+					}
 					break;
 				case "Left":
-					dirX = -1;
-					dirY = 0;
+					if (dirX != -1 && dirY != 0)
+					{
+						dirX = -1;
+						dirY = 0;
+					}
 					break;
 				case "Up":
-					dirY = -1;
-					dirX = 0;
+					if (dirX != 0 && dirY != -1)
+					{
+						dirY = -1;
+						dirX = 0;
+					}
 					break;
 				case "Down":
-					dirY = 1;
-					dirX = 0;
+					if (dirX != 0 && dirY != 1)
+					{
+						dirY = 1;
+						dirX = 0;
+					}
 					break;
 			}
 		}
