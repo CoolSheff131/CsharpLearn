@@ -13,6 +13,8 @@ namespace CsharpLearn
 	
 	public partial class Form1 : Form
 	{
+		private int rI, rJ;
+		private PictureBox fruit;
 		private int dirX, dirY;
 		private int _width = 900;
 		private int _height = 800;
@@ -24,15 +26,30 @@ namespace CsharpLearn
 			this.Height = _height;
 			dirX = 1;
 			dirY = 0;
-			_generatorMap();
+			fruit = new PictureBox();
+			fruit.BackColor = Color.Yellow;
+			fruit.Size = new Size(_sizeOfSides, _sizeOfSides);
+			_generateMap();
+			_generateFruit();
 			timer.Tick += new EventHandler(_update);
 			timer.Interval = 500;
 			timer.Start();
 
 			this.KeyDown += new KeyEventHandler(OKP);
 		}
-		
-		private void _generatorMap()
+		private void _generateFruit()
+		{
+			Random r = new Random();
+			rI = r.Next(0, _width - _sizeOfSides);
+			int tempI = rI % _sizeOfSides;
+			rI -= tempI;
+			rJ = r.Next(0, _width - _sizeOfSides);
+			int tempJ = rJ % _sizeOfSides;
+			rJ -= tempJ;
+			fruit.Location = new Point(rI, rJ);
+			this.Controls.Add(fruit);
+		}
+		private void _generateMap()
 		{
 			for(int i = 0; i<_width / _sizeOfSides; i++)
 			{
