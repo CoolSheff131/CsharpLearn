@@ -12,6 +12,7 @@ namespace tic_tac_toe
 {
 	public partial class Form1 : Form
 	{
+		private Button[,] buttons = new Button[3,3];
 		private int player;
 		public Form1()
 		{
@@ -20,6 +21,31 @@ namespace tic_tac_toe
 			this.Width = 900;
 			player = 1;
 			label1.Text = "Текущий ход: игрок 1";
+			for (int i = 0; i < buttons.Length/3; i++)
+			{
+				for (int j = 0; j < buttons.Length/3; j++)
+				{
+					buttons[i, j] = new Button();
+					buttons[i, j].Size = new Size(200, 200);
+				}
+					
+			}
+				
+			setButtons();
+		}
+		private void setButtons()
+		{
+			Font font = new Font(new FontFamily("Microsoft sans serif"), 138);
+			for (int i = 0; i < buttons.Length/3; i++)
+			{
+				for (int j = 0; j < buttons.Length/3; j++)
+				{
+					buttons[i, j].Location = new Point(12 + 206 * i, 12 + 206 * j);
+					buttons[i, j].Click += button1_Click;
+					buttons[i, j].Font = font;
+					this.Controls.Add(buttons[i, j]);
+				}
+			}
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -43,41 +69,53 @@ namespace tic_tac_toe
 		}
 		private void checkWin()
 		{
-			if (button1.Text == button2.Text && button2.Text == button3.Text && button3.Text != "")
+			if (buttons[0,0].Text == buttons[0,1].Text && buttons[0, 1].Text == buttons[0, 2].Text && buttons[0, 2].Text != "")
 			{
 				MessageBox.Show("Вы победили");
 			}
-			if (button4.Text == button5.Text && button5.Text == button6.Text && button6.Text != "")
+			if (buttons[1,0].Text == buttons[1,1].Text && buttons[1,1].Text == buttons[1,2].Text && buttons[1,2].Text != "")
 			{
 				MessageBox.Show("Вы победили");
 			}
-			if (button7.Text == button8.Text && button8.Text == button9.Text && button9.Text != "")
-			{
-				MessageBox.Show("Вы победили");
-			}
-
-			if (button1.Text == button4.Text && button4.Text == button7.Text && button7.Text != "")
-			{
-				MessageBox.Show("Вы победили");
-			}
-			if (button2.Text == button5.Text && button5.Text == button8.Text && button8.Text != "")
-			{
-				MessageBox.Show("Вы победили");
-			}
-			if (button3.Text == button6.Text && button6.Text == button9.Text && button9.Text != "")
+			if (buttons[2,0].Text == buttons[2,1].Text && buttons[2,1].Text == buttons[2,2].Text && buttons[2,2].Text != "")
 			{
 				MessageBox.Show("Вы победили");
 			}
 
-			if (button1.Text == button5.Text && button5.Text == button9.Text && button9.Text != "")
+			if (buttons[0,0].Text == buttons[1,0].Text && buttons[1,0].Text == buttons[2,0].Text && buttons[2,0].Text != "")
 			{
 				MessageBox.Show("Вы победили");
 			}
-			if (button7.Text == button5.Text && button5.Text == button3.Text && button3.Text != "")
+			if (buttons[0,1].Text == buttons[1,1].Text && buttons[1, 1].Text == buttons[2, 1].Text && buttons[2, 1].Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (buttons[0,2].Text == buttons[1,2].Text && buttons[1,2].Text == buttons[2,2].Text && buttons[2,2].Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+
+			if (buttons[0,0].Text == buttons[1,1].Text && buttons[1,1].Text == buttons[2,2].Text && buttons[2,2].Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (buttons[2,0].Text == buttons[1,1].Text && buttons[1,1].Text == buttons[0,2].Text && buttons[0,2].Text != "")
 			{
 				MessageBox.Show("Вы победили");
 			}
 			
+		}
+
+		private void buttonName_Click(object sender, EventArgs e)
+		{
+			for(int i = 0; i< 3; i++)
+			{
+				for(int j = 0; i < 3; j++)
+				{
+					buttons[i, j].Text = "";
+					buttons[i, j].Enabled = true;
+				}
+			}
 		}
 	}
 }
