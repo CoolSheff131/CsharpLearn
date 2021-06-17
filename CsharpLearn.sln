@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpLearn", "CsharpLearn\CsharpLearn.csproj", "{6726B6DF-AF4E-4473-9377-6F5B08408F5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "snake", "CsharpLearn\snake.csproj", "{6726B6DF-AF4E-4473-9377-6F5B08408F5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tic tac toe", "tic tac toe\tic tac toe.csproj", "{2FA2B5D8-7B75-419E-B053-C29A795E03DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6726B6DF-AF4E-4473-9377-6F5B08408F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6726B6DF-AF4E-4473-9377-6F5B08408F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6726B6DF-AF4E-4473-9377-6F5B08408F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA2B5D8-7B75-419E-B053-C29A795E03DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA2B5D8-7B75-419E-B053-C29A795E03DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA2B5D8-7B75-419E-B053-C29A795E03DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA2B5D8-7B75-419E-B053-C29A795E03DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
