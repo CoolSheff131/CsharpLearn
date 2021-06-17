@@ -108,9 +108,9 @@ namespace tic_tac_toe
 
 		private void buttonName_Click(object sender, EventArgs e)
 		{
-			for(int i = 0; i< 3; i++)
+			for(int i = 0; i<buttons.Length/3; i++)
 			{
-				for(int j = 0; i < 3; j++)
+				for(int j = 0; j < buttons.Length / 3; j++)
 				{
 					buttons[i, j].Text = "";
 					buttons[i, j].Enabled = true;
