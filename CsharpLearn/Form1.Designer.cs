@@ -36,7 +36,7 @@ namespace CsharpLearn
 			// cube
 			// 
 			this.cube.BackColor = System.Drawing.SystemColors.HotTrack;
-			this.cube.Location = new System.Drawing.Point(229, 50);
+			this.cube.Location = new System.Drawing.Point(0, 0);
 			this.cube.Name = "cube";
 			this.cube.Size = new System.Drawing.Size(40, 40);
 			this.cube.TabIndex = 0;
