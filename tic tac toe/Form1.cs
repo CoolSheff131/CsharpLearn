@@ -37,10 +37,47 @@ namespace tic_tac_toe
 					player = 1;
 					break;
 			}
-			sender.GetType().GetProperty("Enabled").SetValue(sender, false); 
+			sender.GetType().GetProperty("Enabled").SetValue(sender, false);
+			checkWin();
 			//MessageBox.Show(sender.GetType().GetProperty("Name").GetValue(sender).ToString());
+		}
+		private void checkWin()
+		{
+			if (button1.Text == button2.Text && button2.Text == button3.Text && button3.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (button4.Text == button5.Text && button5.Text == button6.Text && button6.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (button7.Text == button8.Text && button8.Text == button9.Text && button9.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
 
+			if (button1.Text == button4.Text && button4.Text == button7.Text && button7.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (button2.Text == button5.Text && button5.Text == button8.Text && button8.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (button3.Text == button6.Text && button6.Text == button9.Text && button9.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
 
+			if (button1.Text == button5.Text && button5.Text == button9.Text && button9.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			if (button7.Text == button5.Text && button5.Text == button3.Text && button3.Text != "")
+			{
+				MessageBox.Show("Вы победили");
+			}
+			
 		}
 	}
 }
