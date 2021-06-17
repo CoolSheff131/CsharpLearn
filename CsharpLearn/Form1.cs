@@ -45,7 +45,7 @@ namespace CsharpLearn
 			_generateMap();
 			_generateFruit();
 			timer.Tick += new EventHandler(_update);
-			timer.Interval = 500;
+			timer.Interval = 200;
 			timer.Start();
 
 			this.KeyDown += new KeyEventHandler(OKP);
@@ -53,16 +53,74 @@ namespace CsharpLearn
 		private void _generateFruit()
 		{
 			Random r = new Random();
-			rI = r.Next(0, _width - _sizeOfSides);
+			rI = r.Next(0, _height - _sizeOfSides);
 			int tempI = rI % _sizeOfSides;
 			rI -= tempI;
-			rJ = r.Next(0, _width - _sizeOfSides);
+			rJ = r.Next(0, _height - _sizeOfSides);
 			int tempJ = rJ % _sizeOfSides;
 			rJ -= tempJ;
 			rI++;
 			rJ++;
 			fruit.Location = new Point(rI, rJ);
 			this.Controls.Add(fruit);
+		}
+		private void _checkBorders()
+		{
+			if (snake[0].Location.X < 0)
+			{
+				for (int _i = 1; _i <= score; _i++)
+				{
+					this.Controls.Remove(snake[_i]);
+				}
+				score = 0;
+				labelScore.Text = "Score: " + score;
+				dirX = 1;
+			}
+			if (snake[0].Location.X > _width)
+			{
+				for (int _i = 1; _i <= score; _i++)
+				{
+					this.Controls.Remove(snake[_i]);
+				}
+				score = 0;
+				labelScore.Text = "Score: " + score;
+				dirX = -1;
+			}
+			if (snake[0].Location.Y < 0)
+			{
+				for (int _i = 1; _i <= score; _i++)
+				{
+					this.Controls.Remove(snake[_i]);
+				}
+				score = 0;
+				labelScore.Text = "Score: " + score;
+				dirY = 1;
+			}
+			if (snake[0].Location.Y > _height)
+			{
+				for (int _i = 1; _i <= score; _i++)
+				{
+					this.Controls.Remove(snake[_i]);
+				}
+				score = 0;
+				labelScore.Text = "Score: " + score;
+				dirY = -1;
+			}
+
+
+		}
+		private void _eatItSelf()
+		{
+			for(int _i = 1; _i < score; _i++)
+			{
+				if(snake[0].Location == snake[_i].Location)
+				{
+					for (int _j = _i; _j <= score; _j++)
+						this.Controls.Remove(snake[_j]);
+					score = score - (score - _i + 1);
+					labelScore.Text = "Score: " + score;
+				}
+			}
 		}
 		private void _eatFruit()
 		{
@@ -105,11 +163,14 @@ namespace CsharpLearn
 				snake[i].Location = snake[i - 1].Location;
 			}
 			snake[0].Location = new Point(snake[0].Location.X + dirX * _sizeOfSides, snake[0].Location.Y + dirY * _sizeOfSides);
+			_eatItSelf();
+			_checkBorders();
 		}
 		private void _update(object myObject, EventArgs eventArgs)
 		{
 			_eatFruit();
 			_movesnake();
+
 			//cube.Location = new Point(cube.Location.X + dirX * _sizeOfSides, cube.Location.Y + dirY * _sizeOfSides);
 		}
 		private void OKP(object sender, KeyEventArgs e)
