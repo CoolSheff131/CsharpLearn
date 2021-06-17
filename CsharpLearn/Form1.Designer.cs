@@ -29,35 +29,35 @@ namespace CsharpLearn
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.cube = new System.Windows.Forms.PictureBox();
+			((System.ComponentModel.ISupportInitialize)(this.cube)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// pictureBox1
+			// cube
 			// 
-			this.pictureBox1.BackColor = System.Drawing.SystemColors.HotTrack;
-			this.pictureBox1.Location = new System.Drawing.Point(229, 50);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-			this.pictureBox1.TabIndex = 0;
-			this.pictureBox1.TabStop = false;
+			this.cube.BackColor = System.Drawing.SystemColors.HotTrack;
+			this.cube.Location = new System.Drawing.Point(229, 50);
+			this.cube.Name = "cube";
+			this.cube.Size = new System.Drawing.Size(40, 40);
+			this.cube.TabIndex = 0;
+			this.cube.TabStop = false;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.cube);
 			this.Name = "Form1";
 			this.Text = "Form1";
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.cube)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox cube;
 	}
 }
 

@@ -19,7 +19,12 @@ namespace CsharpLearn
 		}
 		private void OKP(object sender, KeyEventArgs e)
 		{
-			MessageBox.Show(e.KeyCode.ToString());
+			switch (e.KeyCode.ToString())
+			{
+				case "Right":
+					cube.Location = new Point(cube.Location.X + 20, cube.Location.Y);
+					break;
+			}
 		}
 	}
 }
