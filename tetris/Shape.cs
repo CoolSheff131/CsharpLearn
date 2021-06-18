@@ -39,11 +39,11 @@ namespace tetris
 			{ 4,4,0},
 
 		};
-		public int[,] tetr5 = new int[3, 3]
+		public int[,] tetr5 = new int[2, 2]
 		{
-			{ 0,5,5},
-			{ 0,5,5},
-			{ 0,0,0},
+			{ 5,5},
+			{ 5,5},
+			
 
 		};
 		public Shape(int _x,int _y)
@@ -72,6 +72,7 @@ namespace tetris
 					matrix = tetr4;
 					break;
 				case 5:
+					sizeMatrix = 2;
 					matrix = tetr5;
 					break;
 			}

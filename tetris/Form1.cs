@@ -17,6 +17,7 @@ namespace tetris
 		int[,] map = new int[200, 200];
 		int linesRemoved;
 		int score;
+		int interval;
 		public Form1()
 		{
 			InitializeComponent();
@@ -29,13 +30,13 @@ namespace tetris
 			score = 0;
 			linesRemoved = 0;
 			currentShape = new Shape(3, 0);
-
+			interval = 300;
 			label1.Text = "Score: " + score;
 			label2.Text = "Lines: " + linesRemoved;
 
 			this.KeyUp += new KeyEventHandler(keyFunc);
 
-			timer1.Interval = 200;
+			timer1.Interval = interval;
 			timer1.Tick += new EventHandler(update);
 			timer1.Start();
 
@@ -53,7 +54,7 @@ namespace tetris
 			{
 				Merge();
 				SliceMap();
-				timer1.Interval = 300;
+				timer1.Interval = interval;
 				currentShape = new Shape(3, 0);
 			}
 			Merge();
@@ -90,9 +91,27 @@ namespace tetris
 			}
 			linesRemoved += curRemovedLines;
 
+			if(linesRemoved %5 == 0)
+			{
+				if(interval >60)
+				interval -= 10;
+			}
 			label1.Text = "Score: " + score;
 			label2.Text = "Lines: " + linesRemoved;
 		}
+		public bool IsIntersects()
+		{
+			for(int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+			{
+				for(int j = currentShape.x;j<currentShape.x + currentShape.sizeMatrix; j++)
+				{
+					if (map[i, j] != 0 && currentShape.matrix[i - currentShape.y, j - currentShape.x] == 0)
+						return true;
+				}
+			}
+			return false;
+		}
+
 		public void Merge()
 		{
 			for(int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
@@ -204,11 +223,14 @@ namespace tetris
 			switch (e.KeyCode)
 			{
 				case Keys.Up:
-					ResetArea();
-					currentShape.RotateShape();
-					Merge();
-					Invalidate();
-						break;
+					if (!IsIntersects())
+					{
+						ResetArea();
+						currentShape.RotateShape();
+						Merge();
+						Invalidate();
+					}
+					break;
 				
 				case Keys.Space:
 					timer1.Interval = 10;
