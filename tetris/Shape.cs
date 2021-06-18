@@ -9,7 +9,9 @@ namespace tetris
 		public int x;
 		public int y;
 		public int[,] matrix;
+		public int[,] nextMatrix;
 		public int sizeMatrix;
+		public int sizeNextMatrix;
 
 		public int[,] tetr1 = new int[4, 4]
 		{
@@ -50,42 +52,74 @@ namespace tetris
 		{
 			x = _x;
 			y = _y;
-			GenerateMatrix();
+			
+			matrix = GenerateMatrix();
+			sizeMatrix = (int)Math.Sqrt(matrix.Length);
+			nextMatrix = GenerateMatrix();
+			sizeNextMatrix = (int)Math.Sqrt(nextMatrix.Length);
 		}
-		public void GenerateMatrix()
+		public void ResetShape(int _x, int _y)
 		{
+			x = _x;
+			y = _y;
+
+			matrix = nextMatrix;
+			sizeMatrix = (int)Math.Sqrt(matrix.Length);
+			nextMatrix = GenerateMatrix();
+			sizeNextMatrix = (int)Math.Sqrt(nextMatrix.Length);
+		}
+
+		public int[,] GenerateMatrix()
+		{
+			int[,] _matrix = tetr1;
 			Random r = new Random();
-			sizeMatrix = 3;
+			
 			switch (r.Next(1, 6))
 			{
 				case 1:
-					sizeMatrix = 4;
-					matrix = tetr1;
+			
+					_matrix = tetr1;
 					break;
 				case 2:
-					matrix = tetr2;
+					_matrix = tetr2;
 					break;
 				case 3:
-					matrix = tetr3;
+					_matrix = tetr3;
 					break;
 				case 4:
-					matrix = tetr4;
+					_matrix = tetr4;
 					break;
 				case 5:
-					sizeMatrix = 2;
-					matrix = tetr5;
+			
+					_matrix = tetr5;
 					break;
 			}
+			return _matrix;
 		}
 		public void RotateShape()
 		{
+			int[,] tempMatrix = new int[sizeMatrix, sizeMatrix];
 			for (int i = 0; i < sizeMatrix; i++)
 			{
-				for (int j = i; j < sizeMatrix; j++)
+				for (int j = 0; j < sizeMatrix; j++)
 				{
-					int temp = matrix[i, j];
-					matrix[i, j] = matrix[j, i];
-					matrix[j, i] = temp;
+					tempMatrix[i, j] = matrix[j, (sizeMatrix - 1) - i];
+				}
+			}
+			matrix = tempMatrix;
+			int offset = (8 - (x + sizeMatrix));
+			if (offset < 0)
+			{
+				for(int i = 0; i < Math.Abs(offset); i++)
+				{
+					MoveLeft();
+				}
+			}
+			if (x < 0)
+			{
+				for (int i = 0; i < Math.Abs(offset); i++)
+				{
+					MoveRight();
 				}
 			}
 		}

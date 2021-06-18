@@ -39,7 +39,7 @@ namespace tetris
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Segoe UI", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label1.Location = new System.Drawing.Point(338, 85);
+			this.label1.Location = new System.Drawing.Point(335, 402);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(101, 42);
 			this.label1.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace tetris
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Segoe UI", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label2.Location = new System.Drawing.Point(338, 147);
+			this.label2.Location = new System.Drawing.Point(335, 464);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(101, 42);
 			this.label2.TabIndex = 1;

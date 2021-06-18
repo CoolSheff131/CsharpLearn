@@ -21,7 +21,7 @@ namespace tetris
 		public Form1()
 		{
 			InitializeComponent();
-
+			this.KeyUp += new KeyEventHandler(keyFunc);
 			Init();
 		}
 		public void Init()
@@ -34,7 +34,7 @@ namespace tetris
 			label1.Text = "Score: " + score;
 			label2.Text = "Lines: " + linesRemoved;
 
-			this.KeyUp += new KeyEventHandler(keyFunc);
+			
 
 			timer1.Interval = interval;
 			timer1.Tick += new EventHandler(update);
@@ -42,6 +42,36 @@ namespace tetris
 
 			Invalidate();
 		}
+		public void ShowNextShape(Graphics e)
+		{
+			for(int i = 0; i < currentShape.sizeNextMatrix; i++)
+			{
+				for (int j = 0; j < currentShape.sizeNextMatrix; j++)
+				{
+					if (currentShape.nextMatrix[i, j] == 1)
+					{
+						e.FillRectangle(Brushes.Red, new Rectangle(300 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (currentShape.nextMatrix[i, j] == 2)
+					{
+						e.FillRectangle(Brushes.Yellow, new Rectangle(300 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (currentShape.nextMatrix[i, j] == 3)
+					{
+						e.FillRectangle(Brushes.Green, new Rectangle(300 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (currentShape.nextMatrix[i, j] == 4)
+					{
+						e.FillRectangle(Brushes.Blue, new Rectangle(300 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (currentShape.nextMatrix[i, j] == 5)
+					{
+						e.FillRectangle(Brushes.Purple, new Rectangle(300 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+				}
+			}
+		}
+
 		private void update(object sender, EventArgs e)
 		{
 			
@@ -55,7 +85,20 @@ namespace tetris
 				Merge();
 				SliceMap();
 				timer1.Interval = interval;
-				currentShape = new Shape(3, 0);
+				currentShape.ResetShape(3,0);
+				if (Collide())
+				{
+					for(int i = 0; i < 16; i++)
+					{
+						for(int j = 0; j < 8; j++)
+						{
+							map[i, j] = 0;
+						}
+					}
+					timer1.Tick -= new EventHandler(update);
+					timer1.Stop();
+					Init();
+				}
 			}
 			Merge();
 			Invalidate();
@@ -105,6 +148,7 @@ namespace tetris
 			{
 				for(int j = currentShape.x;j<currentShape.x + currentShape.sizeMatrix; j++)
 				{
+					if(j>=0 &&i<=7)
 					if (map[i, j] != 0 && currentShape.matrix[i - currentShape.y, j - currentShape.x] == 0)
 						return true;
 				}
@@ -273,6 +317,7 @@ namespace tetris
 		{
 			DrawGrid(e.Graphics);
 			DrawMap(e.Graphics);
+			ShowNextShape(e.Graphics);
 		}
 	}
 }
