@@ -15,13 +15,32 @@ namespace tetris
 		Shape currentShape;
 		int size;
 		int[,] map = new int[200, 200];
+		int linesRemoved;
+		int score;
 		public Form1()
 		{
 			InitializeComponent();
 
 			Init();
 		}
+		public void Init()
+		{
+			size = 25;
+			score = 0;
+			linesRemoved = 0;
+			currentShape = new Shape(3, 0);
 
+			label1.Text = "Score: " + score;
+			label2.Text = "Lines: " + linesRemoved;
+
+			this.KeyUp += new KeyEventHandler(keyFunc);
+
+			timer1.Interval = 200;
+			timer1.Tick += new EventHandler(update);
+			timer1.Start();
+
+			Invalidate();
+		}
 		private void update(object sender, EventArgs e)
 		{
 			
@@ -33,13 +52,46 @@ namespace tetris
 			else
 			{
 				Merge();
+				SliceMap();
 				currentShape = new Shape(3, 0);
 			}
 			Merge();
 			Invalidate();
 
 		}
+		public void SliceMap()
+		{
+			int count = 0;
+			int curRemovedLines = 0;
+			for(int i = 0; i < 16; i++)
+			{
+				count = 0;
+				for(int j = 0; j < 8; j++)
+				{
+					if(map[i,j]!=0)
+					count++;
+				}
+				if (count == 8)
+				{
+					curRemovedLines++;
+					for(int k = i; k >= 1; k--)
+					{
+						for (int o = 0; o < 8; o++)
+						{
+							map[k, o] = map[k-1, o];
+						}
+					}
+				}
+			}
+			for(int i = 0; i < curRemovedLines; i++)
+			{
+				score += 10 * curRemovedLines;
+			}
+			linesRemoved += curRemovedLines;
 
+			label1.Text = "Score: " + score;
+			label2.Text = "Lines: " + linesRemoved;
+		}
 		public void Merge()
 		{
 			for(int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
@@ -128,20 +180,7 @@ namespace tetris
 			}
 
 		}
-		public void Init()
-		{
-			size = 25;
-
-			currentShape = new Shape(3, 0);
-
-			this.KeyUp += new KeyEventHandler(keyFunc);
-
-			timer1.Interval = 1000;
-			timer1.Tick += new EventHandler(update);
-			timer1.Start();
-
-			Invalidate();
-		}
+		
 
 		private void keyFunc(object sender, KeyEventArgs e)
 		{
