@@ -176,6 +176,22 @@ namespace tetris
 					{
 						e.FillRectangle(Brushes.Red, new Rectangle(50 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
 					}
+					if (map[i, j] == 2)
+					{
+						e.FillRectangle(Brushes.Yellow, new Rectangle(50 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (map[i, j] == 3)
+					{
+						e.FillRectangle(Brushes.Green, new Rectangle(50 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (map[i, j] == 4)
+					{
+						e.FillRectangle(Brushes.Blue, new Rectangle(50 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
+					if (map[i, j] == 5)
+					{
+						e.FillRectangle(Brushes.Purple, new Rectangle(50 + j * size + 1, 50 + i * size + 1, size - 1, size - 1));
+					}
 				}
 			}
 
