@@ -29,6 +29,8 @@ namespace tetris
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
+			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
 			// Form1
@@ -45,6 +47,8 @@ namespace tetris
 		}
 
 		#endregion
+
+		private System.Windows.Forms.Timer timer1;
 	}
 }
 
