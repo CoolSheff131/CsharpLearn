@@ -53,6 +53,7 @@ namespace tetris
 			{
 				Merge();
 				SliceMap();
+				timer1.Interval = 300;
 				currentShape = new Shape(3, 0);
 			}
 			Merge();
@@ -202,7 +203,15 @@ namespace tetris
 		{
 			switch (e.KeyCode)
 			{
+				case Keys.Up:
+					ResetArea();
+					currentShape.RotateShape();
+					Merge();
+					Invalidate();
+						break;
+				
 				case Keys.Space:
+					timer1.Interval = 10;
 					break;
 				case Keys.Right:
 					if (!CollideHor(1))

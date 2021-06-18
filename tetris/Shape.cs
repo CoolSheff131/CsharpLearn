@@ -56,7 +56,7 @@ namespace tetris
 		{
 			Random r = new Random();
 			sizeMatrix = 3;
-			switch (r.Next(1, 5))
+			switch (r.Next(1, 6))
 			{
 				case 1:
 					sizeMatrix = 4;
@@ -74,6 +74,18 @@ namespace tetris
 				case 5:
 					matrix = tetr5;
 					break;
+			}
+		}
+		public void RotateShape()
+		{
+			for (int i = 0; i < sizeMatrix; i++)
+			{
+				for (int j = i; j < sizeMatrix; j++)
+				{
+					int temp = matrix[i, j];
+					matrix[i, j] = matrix[j, i];
+					matrix[j, i] = temp;
+				}
 			}
 		}
 		public void MoveDown()
