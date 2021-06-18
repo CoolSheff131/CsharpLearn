@@ -35,8 +35,7 @@ namespace tetris
 				Merge();
 				currentShape = new Shape(3, 0);
 			}
-			currentShape.MoveDown();
-			
+			Merge();
 			Invalidate();
 
 		}
@@ -60,6 +59,7 @@ namespace tetris
 				{
 					if(currentShape.matrix[i - currentShape.y,j - currentShape.x] != 0)
 					{
+
 						if (i + 1 == 16)
 							return true;
 						if(map[i+1,j] != 0)
@@ -71,15 +71,46 @@ namespace tetris
 			}
 			return false;
 		}
+		public bool CollideHor(int dir)
+		{
+			for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+			{
+				for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+				{
+					if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
+					{
+						if (j + 1 * dir > 7 || j + 1 * dir < 0)
+							return true;
 
+						if (map[i, j + 1 * dir] != 0)
+						{
+							if (j - currentShape.x + 1 * dir >= currentShape.sizeMatrix || j - currentShape.x + 1 * dir < 0)
+							{
+								return true;
+							}
+							if (currentShape.matrix[i - currentShape.y, j - currentShape.x + 1 * dir] == 0)
+								return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
 		public void ResetArea()
 		{
 			for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
 			{
 				for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
 				{
-					if (i >= 0 && j >= 0 && i < 16&&j<8)
-					map[i, j] = 0;
+					if (i >= 0 && j >= 0 && i < 16 && j < 8)
+					{
+						if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
+						{
+							map[i, j] = 0;
+						}
+					}
+
+
 				}
 			}
 		}
@@ -119,16 +150,22 @@ namespace tetris
 				case Keys.Space:
 					break;
 				case Keys.Right:
-					ResetArea();
-					currentShape.MoveRight();
-					Merge();
-					Invalidate();
+					if (!CollideHor(1))
+					{
+						ResetArea();
+						currentShape.MoveRight();
+						Merge();
+						Invalidate();
+					}
 					break;
 				case Keys.Left:
-					ResetArea();
-					currentShape.MoveLeft();
-					Merge();
-					Invalidate();
+					if (!CollideHor(-1))
+					{
+						ResetArea();
+						currentShape.MoveLeft();
+						Merge();
+						Invalidate();
+					}
 					break;
 
 			}
